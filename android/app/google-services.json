@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "749991281227",
+    "firebase_url": "https://coba1-458da.firebaseio.com",
+    "project_id": "coba1-458da",
+    "storage_bucket": "coba1-458da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749991281227:android:4e57d19d61b4f166dcc3ce",
+        "android_client_info": {
+          "package_name": "com.handsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749991281227-idmvqr8ilhbvju6fm5f2i3fk7fgrljir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.handsapp",
+            "certificate_hash": "e83665b43cba3f773ed5693e70ec97bd1283125d"
+          }
+        },
+        {
+          "client_id": "749991281227-ia064guu3utk7he2ikvut2aa62q4uq7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpvj6NwuYzAjTyk6SSuvJdfKF-EecBJ7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749991281227-ia064guu3utk7he2ikvut2aa62q4uq7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
