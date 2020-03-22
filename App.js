@@ -10,6 +10,8 @@ import SplashScreen from 'react-native-splash-screen'
 import login from './src/Screen/Login/Login'
 import SettingsScreen from './src/Screen/Settings/SettingsScreen'
 import homechat from './src/Screen/HomeChat/HomeChat'
+import Loginscreen from './src/Screen/Login/LoginScreen'
+import Logup from './src/Screen/Login/Logup'
 
 const AppStack = createStackNavigator({
 
@@ -42,6 +44,12 @@ const homeNavigator = createStackNavigator(
     },
     Homechat: {
       screen: homechat
+    },
+    Loginscreen: {
+      screen: Loginscreen
+    },
+    Logup: {
+      screen: Logup
     }
   },
   {
