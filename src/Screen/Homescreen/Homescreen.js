@@ -1,39 +1,48 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
+import { Container, Header, Tab, Tabs, TabHeading } from 'native-base';
 // import Ava from './img/matthew.png'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Tab1 from '../HomeChat/HomeChat';
+import Tab2 from '../Login/Login';
+import Tab3 from '../Chat/Chat';
 
 class Homescreen extends Component {
     static navigationOptions = {
         headerShown: false
     };
+
     render() {
+        console.disableYellowBox = true
         return (
+            <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
+                <StatusBar backgroundColor="#047cad" barStyle="light-content" />
 
-            <View style={{ flex: 1 }}>
-                <StatusBar backgroundColor="#35B829" barStyle="light-content" />
-                <View style={{ backgroundColor: 'blue' }}>
-                    <Text style={{ padding: 10, marginVertical: 5, fontSize: 20, color: 'white' }}>HandsApp</Text>
-                </View>
-                {/* sction chat */}
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                    <View style={{ flexDirection: 'row', borderBottomColor: '#aeb3b9', borderBottomWidth: 0.5, height: 80, borderBottomEndRadius: 30, borderBottomStartRadius: 120 }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginHorizontal: 10, top: 5 }}>
-                            <Image source={{ uri: 'https://playjoor.com/assets/avatar/matthew.png' }}
-                                style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
-                        </View>
-                        <View style={{ flex: 3, marginVertical: 10 }}>
-                            <View style={{ top: 5 }}>
-                                <Text style={{ fontSize: 18 }}>0896636042401</Text>
-                            </View>
-                            <View style={{ top: 10 }}>
-                                <Text>Hello</Text>
-                            </View>
-                            {/* <Text style={{ color: '#aeb3b9', top: 15 }}> ─────────────────────── </Text> */}
-                        </View>
+                <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
+                    <View style={{ flex: 5, justifyContent: 'center', padding: 5, marginHorizontal: 10 }}>
+                        <Text style={{ color: 'white', fontSize: 18 }}>HandsApp</Text>
                     </View>
-                </TouchableOpacity>
+                    <View>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
+                            <Icon name="dots-vertical" style={{ fontSize: 30, alignItems: 'center', justifyContent: 'center', paddingRight: 15, color: 'white' }} />
 
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <Tabs tabContainerStyle={{ elevation: 0 }}>
+                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD' }}><Text style={{ color: 'white', fontSize: 30 }}>Chat</Text></TabHeading>} >
+                        <Tab1 />
+                    </Tab>
+                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Kontak</Text></TabHeading>}>
+                        <Tab2 />
+                    </Tab>
+                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Status</Text></TabHeading>}>
+                        <Tab3 />
+                    </Tab>
+                </Tabs>
+                {/* hello */}
             </View>
+
         )
     }
 }

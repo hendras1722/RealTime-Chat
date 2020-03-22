@@ -8,6 +8,9 @@ import Chat from './src/Screen/Chat/Chat'
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SplashScreen from 'react-native-splash-screen'
 import login from './src/Screen/Login/Login'
+import SettingsScreen from './src/Screen/Settings/SettingsScreen'
+import homechat from './src/Screen/HomeChat/HomeChat'
+
 const AppStack = createStackNavigator({
 
   Apps: {
@@ -33,7 +36,16 @@ const homeNavigator = createStackNavigator(
     },
     Login: {
       screen: login,
+    },
+    Settings: {
+      screen: SettingsScreen,
+    },
+    Homechat: {
+      screen: homechat
     }
+  },
+  {
+    initialRouteName: 'Login',
   }
 )
 
