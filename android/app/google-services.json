@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "749991281227-qtqdogjcp62djtor24dr13mq1peufibd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.handsapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "749991281227-idmvqr8ilhbvju6fm5f2i3fk7fgrljir.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
