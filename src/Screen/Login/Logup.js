@@ -71,7 +71,8 @@ class Logup extends Component {
                             name: this.state.name,
                             status: 'Online',
                             email: this.state.email,
-                            photo: "http://photourl.com/photo"
+                            photo: "http://photourl.com/photo",
+                            uid: userCredentials.user.uid
                         })
                         .catch(error => console.log(error.message))
 
@@ -129,7 +130,7 @@ class Logup extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 30 }}>
                         <View>
                             <Button onPress={this.handleSignUp} style={{ padding: 10, width: 300, justifyContent: 'center', alignItems: 'center', backgroundColor: '#067bab' }}>
-                                <Text style={{ color: 'white' }}>Masuk</Text>
+                                <Text style={{ color: 'white' }}>Daftar</Text>
                             </Button>
                         </View>
                     </View>

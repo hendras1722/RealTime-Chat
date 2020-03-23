@@ -4,7 +4,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Item, Input, Button } from 'n
 // import Ava from './img/matthew.png'
 import { auth, db } from '../../Config/Config'
 
-class Homescreen extends Component {
+class Loginscreen extends Component {
     static navigationOptions = {
         headerShown: false
     };
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     }
 });
-export default Homescreen;
+export default Loginscreen;
