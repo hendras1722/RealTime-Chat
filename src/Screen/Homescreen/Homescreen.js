@@ -4,8 +4,8 @@ import { Container, Header, Tab, Tabs, TabHeading } from 'native-base';
 // import Ava from './img/matthew.png'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tab1 from '../HomeChat/HomeChat';
-import Tab2 from '../Login/Login';
-import Tab3 from '../Chat/Chat';
+import Tab2 from '../kontak/kontak';
+import Tab3 from '../Settings/SettingsScreen';
 
 class Homescreen extends Component {
     static navigationOptions = {

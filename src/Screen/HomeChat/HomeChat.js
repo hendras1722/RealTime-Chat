@@ -49,9 +49,9 @@ class HomeChat extends Component {
 
                         {/* <Text>hello</Text> */}
                     </View>
-                    <View style={{ flex: 2, borderColor: 'black', borderBottomWidth: 1 }}>
+                    <View style={{ flex: 2, borderColor: '#b3b6b9', borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 15 }}>{item.name}</Text>
-                        <Text>hello</Text>
+                        <Text>{item.messages}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

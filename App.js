@@ -12,6 +12,7 @@ import SettingsScreen from './src/Screen/Settings/SettingsScreen'
 import homechat from './src/Screen/HomeChat/HomeChat'
 import Loginscreen from './src/Screen/Login/LoginScreen'
 import Logup from './src/Screen/Login/Logup'
+import kontak from './src/Screen/kontak/kontak'
 
 const AppStack = createStackNavigator({
 
@@ -50,6 +51,9 @@ const homeNavigator = createStackNavigator(
     },
     Logup: {
       screen: Logup
+    },
+    kontak: {
+      screen: kontak
     }
   },
   {
