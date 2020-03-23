@@ -66,9 +66,12 @@ class Homescreen extends Component {
     }
 
     renderRow = ({ item }) => {
-        if (auth.currentUser.uid) {
+        if (this.state.uid !== auth.currentUser.uid) {
+            console.log(`ini state uid ${auth.currentUser.uid} - ${this.state.uid}`)
             return (
+
                 <View style={{ marginHorizontal: 5, marginVertical: 5, borderColor: '#FFF', borderWidth: 1, padding: 15, borderRadius: 10, backgroundColor: '#1ebeff73', flexDirection: 'row' }}>
+
                     <View style={{ flex: 5, paddingLeft: 20, paddingRight: 10 }}>
                         <Text>{item.message}</Text>
                     </View>
@@ -79,7 +82,8 @@ class Homescreen extends Component {
                     </View>
                 </View>
             )
-        } else if (!auth.currentUser.uid) {
+        } else {
+            console.log(`ini auth uid ${auth.currentUser.uid}`)
             return (
                 <View style={{ marginHorizontal: 10, marginVertical: 5, borderColor: '#FFF', borderWidth: 1, padding: 15, borderRadius: 10, backgroundColor: '#fff', flexDirection: 'row' }}>
 
@@ -98,7 +102,7 @@ class Homescreen extends Component {
     }
 
     render() {
-        console.log(auth.currentUser.uid)
+        // console.log(auth.currentUser.uid)
         return (
             <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
@@ -109,7 +113,9 @@ class Homescreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontSize: 15 }}>Alan Walker gak suka jalan</Text>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen')} >
+                            <Text style={{ color: 'white', fontSize: 15 }}>{this.state.name}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -137,7 +143,6 @@ class Homescreen extends Component {
                             <Icon name="send" style={{ fontSize: 25, color: '#0092CD' }}></Icon>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             </View>
         )

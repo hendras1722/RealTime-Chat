@@ -5,7 +5,7 @@ import { Container, Header, Tab, Tabs, TabHeading } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tab1 from '../HomeChat/HomeChat';
 import Tab2 from '../kontak/kontak';
-import Tab3 from '../Settings/SettingsScreen';
+import Tab3 from '../Maps/maps';
 
 class Homescreen extends Component {
     static navigationOptions = {

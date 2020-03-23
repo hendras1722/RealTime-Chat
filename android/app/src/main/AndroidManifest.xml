@@ -2,7 +2,11 @@
   package="com.handsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -21,7 +25,10 @@
               <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
         </activity>
-
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDpvj6NwuYzAjTyk6SSuvJdfKF-EecBJ7E"/>
+ 
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

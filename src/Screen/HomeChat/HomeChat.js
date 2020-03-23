@@ -40,6 +40,7 @@ class HomeChat extends Component {
     }
 
     renderRow = ({ item }) => {
+        // console.log(item)
         return (
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
                 <View style={{ flexDirection: 'row', marginVertical: 10 }}>
@@ -63,7 +64,7 @@ class HomeChat extends Component {
         this.props.navigation.navigate('Homechat');
     }
     render() {
-
+        // console.log(this.state.users)
         console.disableYellowBox = true
         return (
             <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>

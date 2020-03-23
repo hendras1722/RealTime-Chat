@@ -13,6 +13,8 @@ import homechat from './src/Screen/HomeChat/HomeChat'
 import Loginscreen from './src/Screen/Login/LoginScreen'
 import Logup from './src/Screen/Login/Logup'
 import kontak from './src/Screen/kontak/kontak'
+import Detailscreen from './src/Screen/Detail/Detailscreen';
+import maps from './src/Screen/Maps/maps'
 
 const AppStack = createStackNavigator({
 
@@ -54,6 +56,12 @@ const homeNavigator = createStackNavigator(
     },
     kontak: {
       screen: kontak
+    },
+    Detailscreen: {
+      screen: Detailscreen
+    },
+    maps: {
+      screen: maps
     }
   },
   {
