@@ -6,11 +6,39 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tab1 from '../HomeChat/HomeChat';
 import Tab2 from '../Upload/Uploadfoto';
 import Tab3 from '../Maps/maps';
+import GetLocation from 'react-native-get-location'
+import { auth, db } from '../../Config/Config'
 
 class Homescreen extends Component {
     static navigationOptions = {
         headerShown: false
     };
+    state = {
+        users: [],
+        latitude: '',
+        longitude: ''
+    }
+
+    getLocation() {
+        const id = auth.currentUser.uid
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000
+        })
+            .then(location => {
+                db.ref('/user/' + id).child("latitude").set(location.latitude)
+                // db.ref('/user/' + id).child("longitude").set(location.longitude)
+            })
+            .catch(error => {
+                const { code, message } = error;
+                console.warn(code, message);
+            })
+        this._isMounted = true;
+    }
+
+    componentDidMount() {
+        this.getLocation()
+    }
 
     render() {
         console.disableYellowBox = true

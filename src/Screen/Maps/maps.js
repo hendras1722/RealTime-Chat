@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MapView from 'react-native-maps';
+import { auth, db, time } from '../../Config/Config'
 import GetLocation from 'react-native-get-location'
 
 class Maps extends Component {
@@ -7,21 +8,43 @@ class Maps extends Component {
         headerShown: false
     };
 
-    componentDidMount() {
-        GetLocation.getCurrentPosition({
-            enableHighAccuracy: true,
-            timeout: 15000,
-        })
-            .then(location => {
-                console.log(location);
-            })
-            .catch(error => {
-                const { code, message } = error;
-                console.warn(code, message);
-            })
+    state = {
+        user: []
     }
+    componentDidMount() {
+        this.getLocation()
+    }
+    getLocation() {
+        db.ref('/user').on('value', (snapshot) => {
+            const data = snapshot.val()
+            const user = Object.values(data)
+            this.setState({
+                user: user
+            })
+        })
+    }
+    // componentDidMount(){
+    //     GetLocation.getCurrentPosition({
+    //         enableHighAccuracy: true,
+    //         timeout: 15000,
+    //     })
+    //     .then(location => {
+    //         console.log(location);
+    //     })
+    //     .catch(error => {
+    //         const { code, message } = error;
+    //         console.warn(code, message);
+    //     })
+    // }
     render() {
-        // console.log(auth.currentUser.uid)
+        const marker = this.state.user.map((item) =>
+            <MapView.Marker
+                coordinate={{
+                    latitude: item.latitude,
+                    longitude: item.longitude,
+                }}
+                title={item.name} />
+        )
         return (
             <MapView
                 style={{ flex: 1, width: window.width }} //window pake Dimensions
@@ -31,13 +54,7 @@ class Maps extends Component {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421
                 }} >
-                <MapView.Marker
-                    coordinate={{
-                        latitude: -6.6210828,
-                        longitude: 106.8185388,
-                    }}
-                    title="Lokasi"
-                    description="Hello" />
+                {marker}
             </MapView>
         )
     }

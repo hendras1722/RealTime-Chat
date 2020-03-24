@@ -6,6 +6,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Item, Input, Button } from 'n
 // import Ava from './img/matthew.png'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { auth, db } from '../../Config/Config'
+import GetLocation from 'react-native-get-location'
 
 class Logup extends Component {
     static navigationOptions = {
@@ -26,11 +27,26 @@ class Logup extends Component {
             errorMessage: null,
             loading: false,
             updatesEnabled: false,
+            location: []
         }
         this.handleSignUp = this.handleSignUp.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        })
+            .then(location => {
+                console.log(location);
+                this.setState({
+                    location: location
+                })
+            })
+            .catch(error => {
+                const { code, message } = error;
+                console.warn(code, message);
+            })
         this._isMounted = true;
 
     };
@@ -68,11 +84,13 @@ class Logup extends Component {
 
                     db.ref('/user/' + userCredentials.user.uid)
                         .set({
+                            uid: userCredentials.user.uid,
                             name: this.state.name,
                             status: 'Online',
                             email: this.state.email,
                             photo: "http://photourl.com/photo",
-                            uid: userCredentials.user.uid
+                            latitude: this.state.location.latitude,
+                            longitude: this.state.location.longitude
                         })
                         .catch(error => console.log(error.message))
 
@@ -85,7 +103,7 @@ class Logup extends Component {
                             displayName: this.state.name,
                             photoURL: "http://linkphoto.com"
                         }).then((s) => {
-                            this.props.navigation.navigate("Home")
+                            this.props.navigation.navigate('Login')
                         })
                     }
 

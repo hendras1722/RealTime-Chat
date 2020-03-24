@@ -6,6 +6,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 import { auth, db } from '../../Config/Config'
+import GetLocation from 'react-native-get-location'
 
 class HomeChat extends Component {
     static navigationOptions = {
@@ -13,11 +14,34 @@ class HomeChat extends Component {
     };
 
     state = {
-        users: []
+        users: [],
+        latitude: '',
+        longtitude: '',
     }
 
     componentDidMount() {
         this.getDataUser()
+        this.getLocation()
+    }
+
+    getLocation() {
+        const id = auth.currentUser.uid
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        })
+            .then(location => {
+                db.ref('/user/' + id).child("latitude").set(location.latitude)
+                db.ref('/user/' + id).child("longitude").set(location.longitude)
+
+            })
+            .catch(error => {
+                const { code, message } = error;
+                console.warn(code, message);
+            })
+
+        this._isMounted = true;
+
     }
 
     getDataUser() {
