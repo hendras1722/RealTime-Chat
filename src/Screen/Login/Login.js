@@ -41,16 +41,11 @@ class Login extends React.Component {
     }
 
     render() {
+        console.disableYellowBox = true
         return (
-
             <View style={{ flex: 1 }}>
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
-                {/* <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10, flexDirection: 'row' }}>
 
-                    <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontSize: 15 }}></Text>
-                    </View>
-                </View> */}
                 {/* sction chat */}
 
                 <View style={{ flex: 1, backgroundColor: '#047cad' }}>
