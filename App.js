@@ -15,6 +15,7 @@ import Logup from './src/Screen/Login/Logup'
 import kontak from './src/Screen/kontak/kontak'
 import Detailscreen from './src/Screen/Detail/Detailscreen';
 import maps from './src/Screen/Maps/maps'
+import foto from './src/Screen/Upload/Uploadfoto'
 
 const AppStack = createStackNavigator({
 
@@ -62,6 +63,9 @@ const homeNavigator = createStackNavigator(
     },
     maps: {
       screen: maps
+    },
+    foto: {
+      screen: foto
     }
   },
   {

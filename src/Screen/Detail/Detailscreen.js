@@ -11,7 +11,7 @@ class Detailscreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: props.navigation.getParam('name'),
+            name: props.navigation.param('name'),
             uid: props.navigation.getParam('uid'),
             textMessage: '',
             messageList: '',

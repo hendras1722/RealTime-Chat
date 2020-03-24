@@ -97,3 +97,20 @@ const Toast = props => {
 };
 
 export default Login;
+
+// <View style={{
+            //     flexDirection: 'row',
+            //     top: 10,
+            //     alignSelf: item.from === auth.currentUser.uid ? 'flex-end' : 'flex-start',
+            //     backgroundColor: item.from === auth.currentUser.uid ? '#0092CD' : '#9ab3bd',
+            //     borderRadius: 5,
+            //     marginBottom: 10,
+            //     marginHorizontal: 10
+            // }}>
+            //     <Text style={{ color: '#000', padding: 10, fontSize: 16 }}>
+            //         {item.message}
+            //     </Text>
+            //     <Text style={{ color: '#eee', fontSize: 12, top: 18, paddingRight: 5 }}>
+            //         {this.convertTime(item.time)}
+            //     </Text>
+            // </View>
