@@ -16,13 +16,12 @@ export default class SettingsScreen extends Component {
     state = {
         imageSource: require('../../../img/user.png'),
         upload: false,
-        name: ''
     };
-    // onLogout = async () => {
-    //     const id = auth.currentUser.uid
-    //     await db.ref('/user/' + id).child("status").set('offline')
-    //     auth.signOut().then(res => console.warn('oke'));
-    // };
+    onLogout = async () => {
+        const id = auth.currentUser.uid
+        await db.ref('/user/' + id).child("status").set('offline')
+        auth.signOut().then(res => console.warn('oke'));
+    };
 
     changeImage = () => {
         const options = {
@@ -51,20 +50,6 @@ export default class SettingsScreen extends Component {
             }
         });
     };
-
-    handleChange = key => val => {
-        this.setState({ [key]: val })
-    }
-
-    EditUser = async () => {
-        if (this.state.textMessage.length > 0) {
-            let usrId = (await db.ref('/user/').child(`/${auth.currentUser.uid}/` + name).push()).key
-            updates['user/' + auth.currentUser.uid]
-            db.ref().update(updates);
-            this.setState({ name: `${this.handleChange}` })
-            console.log(this.state.name)
-        }
-    }
 
     updateUserImage = async (imageUrl) => {
         const id = auth.currentUser.uid
@@ -109,9 +94,22 @@ export default class SettingsScreen extends Component {
     };
 
     render() {
+        const id = this.props
+        console.log('wooweuow', id)
         return (
             <View>
-
+                <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+                            <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 5, justifyContent: 'center' }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat')} >
+                            <Text style={{ color: 'white', fontSize: 15 }}>Nama</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
                     <TouchableOpacity onPress={this.changeImage}>
                         {this.state.upload ? (
@@ -131,11 +129,8 @@ export default class SettingsScreen extends Component {
                 </View>
                 <View style={{ top: 5, justifyContent: 'center', alignItems: 'center' }}>
                     <Item style={{ width: 200 }}>
-                        <Input placeholder={auth.currentUser.displayName} onChangeText={this.EditUser} />
+                        <Input placeholder={auth.currentUser.displayName} />
                     </Item>
-                    <Button style={{ padding: 10, borderRadius: 5, backgroundColor: '#1bb2ef', top: 20 }} onPress={this.EditUser} >
-                        <Text style={{ color: 'white' }}>Save</Text>
-                    </Button>
                 </View>
             </View >
         );

@@ -14,11 +14,13 @@ class Homescreen extends Component {
         this.state = {
             name: props.navigation.getParam('name'),
             uid: props.navigation.getParam('uid'),
+            photo: props.navigation.getParam('photo'),
             textMessage: '',
             messageList: '',
             title: ''
         }
 
+        console.log(props.navigation.getParam('photo'))
     }
 
     componentDidMount() {
@@ -116,6 +118,8 @@ class Homescreen extends Component {
 
     render() {
         // console.log(auth.currentUser.uid)
+        // console.log(id)
+        const { id } = this.state.uid
         return (
             <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
@@ -126,7 +130,7 @@ class Homescreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen'), id} >
                             <Text style={{ color: 'white', fontSize: 15 }}>{this.state.name}</Text>
                         </TouchableOpacity>
                     </View>

@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class SettingsScreen extends Component {
+export default class signup extends Component {
     static navigationOptions = {
         headerShown: false
     };
@@ -16,13 +16,13 @@ export default class SettingsScreen extends Component {
     state = {
         imageSource: require('../../../img/user.png'),
         upload: false,
-        name: ''
+        photo: []
     };
-    // onLogout = async () => {
-    //     const id = auth.currentUser.uid
-    //     await db.ref('/user/' + id).child("status").set('offline')
-    //     auth.signOut().then(res => console.warn('oke'));
-    // };
+    onLogout = async () => {
+        const id = auth.currentUser.uid
+        await db.ref('/user/' + id).child("status").set('offline')
+        auth.signOut().then(res => console.warn('oke'));
+    };
 
     changeImage = () => {
         const options = {
@@ -52,20 +52,6 @@ export default class SettingsScreen extends Component {
         });
     };
 
-    handleChange = key => val => {
-        this.setState({ [key]: val })
-    }
-
-    EditUser = async () => {
-        if (this.state.textMessage.length > 0) {
-            let usrId = (await db.ref('/user/').child(`/${auth.currentUser.uid}/` + name).push()).key
-            updates['user/' + auth.currentUser.uid]
-            db.ref().update(updates);
-            this.setState({ name: `${this.handleChange}` })
-            console.log(this.state.name)
-        }
-    }
-
     updateUserImage = async (imageUrl) => {
         const id = auth.currentUser.uid
         auth.currentUser.photo = imageUrl
@@ -73,6 +59,7 @@ export default class SettingsScreen extends Component {
         Alert.alert('Succes', 'image changed successfull')
         this.setState({ upload: false, imageSource: { uri: imageUrl } })
     }
+
 
     uploadFile = async () => {
         const file = await this.uriToBlob(this.state.imageSource.uri);
@@ -111,7 +98,16 @@ export default class SettingsScreen extends Component {
     render() {
         return (
             <View>
-
+                <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+                            <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 5, justifyContent: 'center' }}>
+                        <Text style={{ color: 'white', fontSize: 15 }}>Profile</Text>
+                    </View>
+                </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
                     <TouchableOpacity onPress={this.changeImage}>
                         {this.state.upload ? (
@@ -130,11 +126,14 @@ export default class SettingsScreen extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{ top: 5, justifyContent: 'center', alignItems: 'center' }}>
-                    <Item style={{ width: 200 }}>
-                        <Input placeholder={auth.currentUser.displayName} onChangeText={this.EditUser} />
-                    </Item>
-                    <Button style={{ padding: 10, borderRadius: 5, backgroundColor: '#1bb2ef', top: 20 }} onPress={this.EditUser} >
-                        <Text style={{ color: 'white' }}>Save</Text>
+                    {/* <Item style={{ width: 200 }}>
+                        <Input placeholder={auth.currentUser.displayName} />
+                    </Item> */}
+                    <Text>{auth.currentUser.displayName}</Text>
+                </View>
+                <View style={{ marginVertical: 30, justifyContent: 'center', alignItems: 'center' }}>
+                    <Button style={{ padding: 10, borderRadius: 5, backgroundColor: '#1bb2ef', width: 100, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Home')}>
+                        <Text style={{ color: 'white' }}>Lanjut</Text>
                     </Button>
                 </View>
             </View >

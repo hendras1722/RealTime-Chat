@@ -11,6 +11,12 @@ const firebaseConfig = {
     measurementId: "G-N9HVT6CVZL"
 };
 
+login = async (user, success_callback, failed_callback) => {
+    await firebase.auth()
+        .signInWithEmailAndPassword(user.email, user.password)
+        .then(success_callback, failed_callback);
+}
+
 const appConfig = Firebase.initializeApp(firebaseConfig);
 export const db = appConfig.database();
 export const auth = Firebase.auth();

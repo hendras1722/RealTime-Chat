@@ -1,67 +1,65 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
+import { SafeAreaView, AsyncStorage, View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from 'firebase';
+import ImagePicker from 'react-native-image-picker';
+import { auth, db } from '../../Config/Config'
 
-class Detailscreen extends Component {
+export default class Detailscreen extends React.Component {
     static navigationOptions = {
         headerShown: false
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.navigation.param('name'),
-            uid: props.navigation.getParam('uid'),
-            textMessage: '',
-            messageList: '',
-        }
-        console.log(props.navigation.getParam('name'))
+    state = {
+        users: []
     }
-
-    getDataUser() {
-        db.ref('/user').on('value', (snapshot) => {
-            const current_user = auth.currentUser.uid
-            const data = snapshot.val()
-            const user = Object.values(data)
-            const result = user.filter(user => user.uid !== current_user);
-            // console.log(result)
+    componentDidMount() {
+        this.getDetails()
+    }
+    getDetails() {
+        const id = this.props.navigation.state.params
+        db.ref('/user/' + id).on('value', (snapshot) => {
+            const user = snapshot.val()
             this.setState({
-                users: result
+                users: user
             })
-            // console.log(user)
-        })
+        }
+        )
     }
 
     render() {
-        console.disableYellowBox = true
-        const { name } = this.props
-        console.log(this.getDataUser)
+        const { photo } = this.props
+        console.log(photo)
         return (
-            <View>
+            <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
-                <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10, flexDirection: 'row' }}>
+                <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat')} >
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen')} >
-                            <Text style={{ color: 'white', fontSize: 15 }}>{this.HandleGetUserId}</Text>
-                        </TouchableOpacity>
+                        <Text style={{ color: 'white', fontSize: 15 }}>Nama</Text>
                     </View>
                 </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+                    <TouchableOpacity >
+                        <Image style={{ width: 100, height: 100, borderRadius: 100, resizeMode: 'cover' }}
+                            source={require('../../../img/user.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
                 <View>
-                    <View>
-                        <Text>hello</Text>
-                    </View>
-                    <View></View>
-                    {/* <Text>hello</Text> */}
+                    <Text style={{ fontSize: 10, paddingLeft: 20 }}>Nama</Text>
+                    <Text style={{ fontSize: 15, paddingLeft: 20, paddingTop: 10 }}>{this.state.users.name}</Text>
+                </View>
+
+                <View style={{ paddingTop: 10 }}>
+                    <Text style={{ fontSize: 10, paddingLeft: 20 }}>Status</Text>
+                    <Text style={{ fontSize: 15, paddingLeft: 20, paddingTop: 10 }}>Status Orangnya</Text>
                 </View>
             </View>
         )
     }
 }
-
-export default Detailscreen;

@@ -16,23 +16,11 @@ import kontak from './src/Screen/kontak/kontak'
 import Detailscreen from './src/Screen/Detail/Detailscreen';
 import maps from './src/Screen/Maps/maps'
 import foto from './src/Screen/Upload/Uploadfoto'
-
-const AppStack = createStackNavigator({
-
-  Apps: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#f4f4f4',
-        elevation: 0,
-        height: 35,
-      },
-    }
-  }
-});
+import Biodata from './src/Screen/Biodata/Biodata'
+import signup from './src/Screen/Login/singupfoto'
+import Loading from "./src/Navigation/Loading";
 
 const homeNavigator = createStackNavigator(
-
   {
     Home: {
       screen: HomeScreen,
@@ -40,17 +28,11 @@ const homeNavigator = createStackNavigator(
     Chat: {
       screen: Chat,
     },
-    Login: {
-      screen: login,
-    },
     Settings: {
       screen: SettingsScreen,
     },
     Homechat: {
       screen: homechat
-    },
-    Loginscreen: {
-      screen: Loginscreen
     },
     Logup: {
       screen: Logup
@@ -66,14 +48,98 @@ const homeNavigator = createStackNavigator(
     },
     foto: {
       screen: foto
+    },
+    Loginscreen: {
+      screen: Loginscreen
+    },
+    Loading: {
+      screen: Loading
+    },
+    Biodata: {
+      screen: Biodata
+    },
+    signup: {
+      screen: signup
+    }
+  }
+)
+
+const AppNavigator = createSwitchNavigator(
+
+  {
+    Home: {
+      screen: homeNavigator
+    },
+    Login: {
+      screen: login,
     }
   },
   {
     initialRouteName: 'Login',
   }
-)
+);
 
-const AppContainer = createAppContainer(homeNavigator);
+
+// const AppStack = createStackNavigator({
+
+//   Apps: {
+//     screen: HomeScreen,
+//     navigationOptions: {
+//       headerStyle: {
+//         backgroundColor: '#f4f4f4',
+//         elevation: 0,
+//         height: 35,
+//       },
+//     }
+//   }
+// });
+
+// const homeNavigator = createStackNavigator(
+
+//   {
+//     Home: {
+//       screen: HomeScreen,
+//     },
+//     Chat: {
+//       screen: Chat,
+//     },
+//     Login: {
+//       screen: login,
+//     },
+//     Settings: {
+//       screen: SettingsScreen,
+//     },
+//     Homechat: {
+//       screen: homechat
+//     },
+//     Loginscreen: {
+//       screen: Loginscreen
+//     },
+//     Logup: {
+//       screen: Logup
+//     },
+//     kontak: {
+//       screen: kontak
+//     },
+//     Detailscreen: {
+//       screen: Detailscreen
+//     },
+//     maps: {
+//       screen: maps
+//     },
+//     foto: {
+//       screen: foto
+//     },
+//     Loading: {
+//       screen: Loading
+//     }
+//   },
+//   {
+//     initialRouteName: 'Login',
+//   }
+// )
+
+const AppContainer = createAppContainer(AppNavigator);
 
 
 function App() {

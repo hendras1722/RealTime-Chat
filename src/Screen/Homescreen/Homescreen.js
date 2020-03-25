@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
-import { Container, Header, Tab, Tabs, TabHeading } from 'native-base';
+import { Container, Header, Tab, Tabs, TabHeading, ScrollableTab } from 'native-base';
 // import Ava from './img/matthew.png'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tab1 from '../HomeChat/HomeChat';
 import Tab2 from '../Upload/Uploadfoto';
 import Tab3 from '../Maps/maps';
+import Tab4 from '../Settings/SettingsScreen';
 import GetLocation from 'react-native-get-location'
 import { auth, db } from '../../Config/Config'
 
@@ -52,21 +53,24 @@ class Homescreen extends Component {
                         <Text style={{ color: 'white', fontSize: 18 }}>HandsApp</Text>
                     </View>
                     <View>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Biodata')}>
                             <Icon name="dots-vertical" style={{ fontSize: 30, alignItems: 'center', justifyContent: 'center', paddingRight: 15, color: 'white' }} />
 
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Tabs tabContainerStyle={{ elevation: 0 }}>
+                <Tabs tabContainerStyle={{ elevation: 0 }} renderTabBar={() => <ScrollableTab />}>
                     <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD' }}><Text style={{ color: 'white', fontSize: 30 }}>Chat</Text></TabHeading>} >
                         <Tab1 />
                     </Tab>
                     <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Kontak</Text></TabHeading>}>
                         <Tab2 />
                     </Tab>
-                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Status</Text></TabHeading>}>
+                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Track</Text></TabHeading>}>
                         <Tab3 />
+                    </Tab>
+                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Settings</Text></TabHeading>}>
+                        <Tab4 />
                     </Tab>
                 </Tabs>
                 {/* hello */}

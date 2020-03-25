@@ -103,7 +103,7 @@ class Logup extends Component {
                             displayName: this.state.name,
                             photoURL: "http://linkphoto.com"
                         }).then((s) => {
-                            this.props.navigation.navigate('Login')
+                            this.props.navigation.navigate('signup')
                         })
                     }
 
@@ -123,8 +123,13 @@ class Logup extends Component {
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
 
                 <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
-                    <View style={{ flex: 5, justifyContent: 'center', padding: 5, marginHorizontal: 10 }}>
-                        <Text style={{ color: 'white', fontSize: 18 }}>Daftar</Text>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Logup')} >
+                            <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 5, justifyContent: 'center' }}>
+                        <Text style={{ color: 'white', fontSize: 15 }}>Daftar</Text>
                     </View>
                 </View>
 

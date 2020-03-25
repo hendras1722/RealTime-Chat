@@ -76,7 +76,7 @@ class Loginscreen extends Component {
 
                 {/* hello */}
                 <View style={{ backgroundColor: '#0092CD', justifyContent: 'center', alignItems: 'center', height: 150 }}>
-                    <Image source={require('../../../img/handsapp.png')} style={{ width: 20, height: 20 }} />
+                    <Image source={require('../../../img/handsapp.png')} style={{ width: 80, height: 80, top: -30, borderRadius: 50 }} />
                 </View>
                 <View style={{ flex: 1, backgroundColor: 'white' }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 10 }}>
