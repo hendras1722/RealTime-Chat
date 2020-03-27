@@ -86,7 +86,7 @@ class Loginscreen extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 10 }}>
                         <Item style={{ width: 300 }}>
-                            <Input placeholder="Password" onChangeText={password => this.setState({ password })} value={this.state.password} />
+                            <Input placeholder="Password" secureTextEntry={true} onChangeText={password => this.setState({ password })} value={this.state.password} />
                         </Item>
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 30 }}>

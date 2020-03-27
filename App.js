@@ -22,6 +22,9 @@ import Loading from "./src/Navigation/Loading";
 
 const homeNavigator = createStackNavigator(
   {
+    Loginscreen: {
+      screen: Loginscreen
+    },
     Home: {
       screen: HomeScreen,
     },
@@ -49,9 +52,7 @@ const homeNavigator = createStackNavigator(
     foto: {
       screen: foto
     },
-    Loginscreen: {
-      screen: Loginscreen
-    },
+
     Loading: {
       screen: Loading
     },
@@ -67,11 +68,11 @@ const homeNavigator = createStackNavigator(
 const AppNavigator = createSwitchNavigator(
 
   {
-    Home: {
-      screen: homeNavigator
-    },
     Login: {
       screen: login,
+    },
+    Home: {
+      screen: homeNavigator
     }
   },
   {
@@ -80,64 +81,19 @@ const AppNavigator = createSwitchNavigator(
 );
 
 
-// const AppStack = createStackNavigator({
+const AppStack = createStackNavigator({
 
-//   Apps: {
-//     screen: HomeScreen,
-//     navigationOptions: {
-//       headerStyle: {
-//         backgroundColor: '#f4f4f4',
-//         elevation: 0,
-//         height: 35,
-//       },
-//     }
-//   }
-// });
-
-// const homeNavigator = createStackNavigator(
-
-//   {
-//     Home: {
-//       screen: HomeScreen,
-//     },
-//     Chat: {
-//       screen: Chat,
-//     },
-//     Login: {
-//       screen: login,
-//     },
-//     Settings: {
-//       screen: SettingsScreen,
-//     },
-//     Homechat: {
-//       screen: homechat
-//     },
-//     Loginscreen: {
-//       screen: Loginscreen
-//     },
-//     Logup: {
-//       screen: Logup
-//     },
-//     kontak: {
-//       screen: kontak
-//     },
-//     Detailscreen: {
-//       screen: Detailscreen
-//     },
-//     maps: {
-//       screen: maps
-//     },
-//     foto: {
-//       screen: foto
-//     },
-//     Loading: {
-//       screen: Loading
-//     }
-//   },
-//   {
-//     initialRouteName: 'Login',
-//   }
-// )
+  Apps: {
+    screen: HomeScreen,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4f4f4',
+        elevation: 0,
+        height: 35,
+      },
+    }
+  }
+});
 
 const AppContainer = createAppContainer(AppNavigator);
 

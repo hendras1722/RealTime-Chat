@@ -117,15 +117,7 @@ export default class SettingsScreen extends Component {
                         {this.state.upload ? (
                             <ActivityIndicator size="large" />
                         ) : (
-                                <Image
-                                    style={{
-                                        width: 100,
-                                        height: 100,
-                                        borderRadius: 100,
-                                        resizeMode: 'cover'
-                                    }}
-                                    source={this.state.imageSource}
-                                />
+                                <Image style={{ width: 100, height: 100, borderRadius: 100, resizeMode: 'cover' }} source={this.state.imageSource} />
                             )}
                     </TouchableOpacity>
                 </View>

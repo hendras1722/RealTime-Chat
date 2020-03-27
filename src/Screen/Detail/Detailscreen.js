@@ -35,7 +35,7 @@ export default class Detailscreen extends React.Component {
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
                 <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} >
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>
@@ -52,7 +52,7 @@ export default class Detailscreen extends React.Component {
                 </View>
                 <View>
                     <Text style={{ fontSize: 10, paddingLeft: 20 }}>Nama</Text>
-                    <Text style={{ fontSize: 15, paddingLeft: 20, paddingTop: 10 }}>{this.state.users.name}</Text>
+                    <Text style={{ fontSize: 15, paddingLeft: 20, paddingTop: 10 }}>nama</Text>
                 </View>
 
                 <View style={{ paddingTop: 10 }}>

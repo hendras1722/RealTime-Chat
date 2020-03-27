@@ -23,13 +23,14 @@ class Homescreen extends Component {
 
     getLocation() {
         const id = auth.currentUser.uid
+
         GetLocation.getCurrentPosition({
             enableHighAccuracy: true,
             timeout: 15000
         })
             .then(location => {
-                db.ref('/user/' + id).child("latitude").set(location.latitude)
-                // db.ref('/user/' + id).child("longitude").set(location.longitude)
+                db.ref('/user/' + id).child("latitude").set("-6.241586")
+                db.ref('/user/' + id).child("longitude").set("106.992416")
             })
             .catch(error => {
                 const { code, message } = error;
@@ -43,6 +44,7 @@ class Homescreen extends Component {
     }
 
     render() {
+        console.log(auth.currentUser.uid)
         console.disableYellowBox = true
         return (
             <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
@@ -62,9 +64,6 @@ class Homescreen extends Component {
                 <Tabs tabContainerStyle={{ elevation: 0 }} renderTabBar={() => <ScrollableTab />}>
                     <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD' }}><Text style={{ color: 'white', fontSize: 30 }}>Chat</Text></TabHeading>} >
                         <Tab1 />
-                    </Tab>
-                    <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Kontak</Text></TabHeading>}>
-                        <Tab2 />
                     </Tab>
                     <Tab heading={<TabHeading style={{ backgroundColor: '#0092CD', color: 'white' }}><Text style={{ color: 'white', fontSize: 30 }}>Track</Text></TabHeading>}>
                         <Tab3 />

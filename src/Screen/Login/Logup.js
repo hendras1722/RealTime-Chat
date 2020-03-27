@@ -22,6 +22,7 @@ class Logup extends Component {
             email: '',
             password: '',
             uid: '',
+            photo: '',
             latitude: null,
             longitude: null,
             errorMessage: null,
@@ -88,7 +89,7 @@ class Logup extends Component {
                             name: this.state.name,
                             status: 'Online',
                             email: this.state.email,
-                            photo: "http://photourl.com/photo",
+                            photo: this.state.photo,
                             latitude: this.state.location.latitude,
                             longitude: this.state.location.longitude
                         })
@@ -101,7 +102,7 @@ class Logup extends Component {
                     if (userCredentials.user) {
                         userCredentials.user.updateProfile({
                             displayName: this.state.name,
-                            photoURL: "http://linkphoto.com"
+                            photoURL: this.state.photo
                         }).then((s) => {
                             this.props.navigation.navigate('signup')
                         })

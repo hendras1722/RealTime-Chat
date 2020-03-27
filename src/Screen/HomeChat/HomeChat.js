@@ -45,7 +45,7 @@ class HomeChat extends Component {
     }
 
     getDataUser() {
-        db.ref('/user').on('value', (snapshot) => {
+        db.ref('/user').once('value', (snapshot) => {
             const current_user = auth.currentUser.uid
             const data = snapshot.val()
             const user = Object.values(data)
@@ -69,8 +69,13 @@ class HomeChat extends Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
                 <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={{ uri: `${item.photo}` }}
+                        <Image source={
+                            item.photo ? { uri: item.photo } : require('../../../img/user.png')
+                        }
                             style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
+
+                        {/* <Image source={{ uri: `${item.photo}` }}
+                            style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} /> */}
 
                         {/* <Text>hello</Text> */}
                     </View>
