@@ -7,6 +7,7 @@ import { Button, Item, Input } from 'native-base'
 import firebase from 'firebase';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import User from '../../../User'
 
 export default class SettingsScreen extends Component {
     static navigationOptions = {
@@ -14,12 +15,17 @@ export default class SettingsScreen extends Component {
     };
 
     state = {
-        imageSource: require('../../../img/user.png'),
+        imageSource: { uri: User.photo },
         upload: false,
+        names: '',
+        name: User.name,
+        photo: User.photo
     };
+
     onLogout = async () => {
         const id = auth.currentUser.uid
         await db.ref('/user/' + id).child("status").set('offline')
+        this.props.navigation.navigate('Login')
         auth.signOut().then(res => console.warn('oke'));
     };
 
@@ -49,6 +55,22 @@ export default class SettingsScreen extends Component {
                 );
             }
         });
+    };
+
+    onSubmit = async () => {
+        const { name } = this.state;
+        if (name.length < 1) {
+            console.log('error')
+        } else {
+            User.name = name;
+            await this.updateUser();
+        }
+    };
+
+
+    updateUser = () => {
+        db.ref('/user').child(auth.currentUser.uid).set(User);
+        Alert.alert('Success', 'succesfull.');
     };
 
     updateUserImage = async (imageUrl) => {
@@ -100,13 +122,13 @@ export default class SettingsScreen extends Component {
             <View>
                 <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} >
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat')} >
-                            <Text style={{ color: 'white', fontSize: 15 }}>Nama</Text>
+                        <TouchableOpacity >
+                            <Text style={{ color: 'white', fontSize: 15 }}>Profile</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -129,8 +151,22 @@ export default class SettingsScreen extends Component {
                 </View>
                 <View style={{ top: 5, justifyContent: 'center', alignItems: 'center' }}>
                     <Item style={{ width: 200 }}>
-                        <Input placeholder={auth.currentUser.displayName} />
+                        <Input value={this.state.name} onChangeText={(text) => this.setState({ name: text })} />
                     </Item>
+                </View>
+                <View style={{ marginVertical: 2.5, top: 5 }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30 }}>
+                        <Button style={{ padding: 10, backgroundColor: '#0092CD', width: 70, justifyContent: 'center', alignItems: 'center' }} onPress={this.onSubmit}>
+                            <Text style={{ color: 'white' }}>Save</Text>
+                        </Button>
+                    </View>
+                </View>
+                <View style={{ marginVertical: 2.5 }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30 }}>
+                        <Button onPress={this.onLogout} style={{ padding: 10, backgroundColor: '#c41414', width: 70, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: 'white' }}>Logout</Text>
+                        </Button>
+                    </View>
                 </View>
             </View >
         );

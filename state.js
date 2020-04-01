@@ -3,10 +3,7 @@ const User = {
     name: null,
     email: null,
     phone: null,
-    status: null,
-    photo: null,
-    Teman: []
-
+    image: null
 }
 
 export default User;

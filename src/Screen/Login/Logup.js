@@ -88,10 +88,10 @@ class Logup extends Component {
                             uid: userCredentials.user.uid,
                             name: this.state.name,
                             status: 'Online',
-                            email: this.state.email,
                             photo: this.state.photo,
+                            longitude: this.state.location.longitude,
                             latitude: this.state.location.latitude,
-                            longitude: this.state.location.longitude
+                            email: this.state.email,
                         })
                         .catch(error => console.log(error.message))
 
@@ -148,7 +148,7 @@ class Logup extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 10 }}>
                         <Item style={{ width: 300 }}>
-                            <Input placeholder="Password" onChangeText={password => this.setState({ password })} value={this.state.password} />
+                            <Input placeholder="Password" secureTextEntry={true} onChangeText={password => this.setState({ password })} value={this.state.password} />
                         </Item>
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', top: 30 }}>

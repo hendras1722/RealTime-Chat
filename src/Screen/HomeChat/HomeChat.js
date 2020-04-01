@@ -44,6 +44,7 @@ class HomeChat extends Component {
 
     }
 
+
     getDataUser() {
         db.ref('/user').once('value', (snapshot) => {
             const current_user = auth.currentUser.uid
@@ -74,14 +75,10 @@ class HomeChat extends Component {
                         }
                             style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
 
-                        {/* <Image source={{ uri: `${item.photo}` }}
-                            style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} /> */}
-
-                        {/* <Text>hello</Text> */}
                     </View>
                     <View style={{ flex: 2, borderColor: '#b3b6b9', borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 15 }}>{item.name}</Text>
-                        <Text>{item.status}</Text>
+                        <Text style={{ top: 10 }}>{item.status}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

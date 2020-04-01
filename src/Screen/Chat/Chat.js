@@ -3,6 +3,8 @@ import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, FlatList } f
 // import Ava from './img/matthew.png'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { auth, db, time } from '../../Config/Config'
+import moment from 'moment'
+import User from '../../../User'
 
 class Chat extends Component {
     static navigationOptions = {
@@ -15,15 +17,22 @@ class Chat extends Component {
             name: props.navigation.getParam('name'),
             uid: props.navigation.getParam('uid'),
             photo: props.navigation.getParam('photo'),
+            status: props.navigation.getParam('status'),
             textMessage: '',
+            messages: '',
             messageList: '',
-            title: ''
+            title: '',
+            test: []
+            // test: props.navigation.navigate
         }
 
-        console.log(this.state.photo)
+        console.log(this.props.name)
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await this.getDataUser()
+        // this.state.test.push(this.state.name)
+        console.log("hello", this.props.name)
         db.ref('/messages/').child(`/${auth.currentUser.uid}/`).child(`/${this.state.uid}/`)
             .on('child_added', (value) => {
                 this.setState((prevState) => {
@@ -32,6 +41,34 @@ class Chat extends Component {
                     }
                 })
             })
+    }
+
+    deleteDataUser = async () => {
+        db.ref('/message').once('value', (snapshot) => {
+            const current_user = auth.currentUser.uid
+            const data = snapshot.val()
+            const message = Object.values(data)
+            // const result = message.filter(user => user.uid !== current_user);
+            console.log(message)
+            this.setState({
+                messages: message
+            })
+            console.log(messages)
+        })
+    }
+
+    getDataUser() {
+        db.ref('/user').once('value', (snapshot) => {
+            const current_user = auth.currentUser.uid
+            const data = snapshot.val()
+            const user = Object.values(data)
+            const result = user.filter(user => user.uid !== current_user);
+            // console.log(result)
+            this.setState({
+                users: result
+            })
+            // console.log(user)
+        })
     }
 
 
@@ -48,7 +85,7 @@ class Chat extends Component {
             updates['messages/' + this.state.uid + '/' + auth.currentUser.uid + '/' + msgId] = message
             db.ref().update(updates);
             this.setState({ textMessage: '' })
-            console.log(this.state.textMessage)
+            // console.log(this.state.textMessage)
         }
     }
 
@@ -57,51 +94,59 @@ class Chat extends Component {
         this.setState({ [key]: val })
     }
 
-
-    convertTime = (time) => {
-        let d = new Date(time);
-        let c = new Date();
-        let result = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':';
-        result += (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-        if (c.getDay() !== d.getDay()) {
-            result = d.getDay() + '' + d.getMonth() + '' + result;
-        }
-        return result
-    }
-
     renderRow = ({ item }) => {
         console.disableYellowBox = true;
+        console.log("ok", item)
         // console.log(auth.currentUser.uid)
         const Chat = () => {
             if (item.from == auth.currentUser.uid) {
                 return (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
-                        <View style={{ marginHorizontal: 5, marginVertical: 5, borderColor: '#FFF', borderWidth: 1, padding: 15, borderRadius: 10, backgroundColor: '#1bb2ef', flexDirection: 'row' }}>
-                            <View style={{ flex: 5, paddingLeft: 20, paddingRight: 10 }}>
+                    <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 20, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+
+                        <View style={{ backgroundColor: '#1bb2ef', padding: 10, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderTopRightRadius: 5, borderBottomRightRadius: 1 }}>
+                            <View style={{ maxWidth: 180, minWidth: 50 }}>
                                 <Text>{item.message}</Text>
                             </View>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Image source={{ uri: `${this.state.photo}` }} vstyle={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
-                                <Text style={{ top: 5 }}>{this.convertTime(item.time)}
-                                </Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flex: 5 }}>
+                                    <Text style={{ top: 5, fontSize: 10 }}>
+                                        {moment(item.time).format('LT')}
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1 }}></View>
                             </View>
                         </View>
-                    </TouchableOpacity>
+                        <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderRightColor: 'transparent', borderRightWidth: 20, borderLeftColor: '#1bb2ef', borderLeftWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={{ uri: `${User.photo}` }} style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
+                        </View>
+                    </View >
                 )
             } else {
                 return (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
-                        <View style={{ marginHorizontal: 5, marginVertical: 5, borderColor: '#FFF', borderWidth: 1, padding: 15, borderRadius: 10, backgroundColor: '#9ab3bd', flexDirection: 'row' }}>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Image source={{ uri: `${this.state.photo}` }} style={{ width: 50, height: 50, borderRadius: 50, position: 'relative', borderColor: 'white', borderWidth: 3 }} onPress={() => this.props.navigation.navigate('Home')} />
-                                <Text style={{ top: 5 }}>{this.convertTime(item.time)}
-                                </Text>
+                    <TouchableOpacity >
+                        <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 35, alignItems: 'flex-end', justifyContent: 'flex-start' }} >
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen', { itemid: item.from })}>
+                                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image source={{ uri: `${this.state.photo}` }} style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
+                                </View>
+                            </TouchableOpacity >
+                            <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderLeftColor: 'transparent', borderLeftWidth: 20, borderRightColor: '#1bb2ef', borderRightWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
                             </View>
-                            <View style={{ flex: 5, paddingLeft: 20, paddingRight: 10 }}>
-                                <Text>{item.message}</Text>
+                            <View style={{ backgroundColor: '#1bb2ef', padding: 10, borderTopRightRadius: 5, borderBottomRightRadius: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 1 }}>
+                                <View style={{ maxWidth: 180, minWidth: 50 }}>
+                                    <Text>{item.message}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}></View>
+                                    <View style={{ flex: 5 }}>
+                                        <Text style={{ top: 5, fontSize: 10 }}>{moment(item.time).format('LT')}
+                                        </Text>
+                                    </View>
+                                </View>
                             </View>
-
-                        </View>
+                        </View >
                     </TouchableOpacity>
                 )
             }
@@ -117,9 +162,8 @@ class Chat extends Component {
 
 
     render() {
-        // console.log(auth.currentUser.uid)
-        // console.log(id)
         const { id } = this.state.uid
+        // console.log(this.state.test)
         return (
             <View style={{ flex: 1, backgroundColor: '#f5f4f4' }}>
                 <StatusBar backgroundColor="#047cad" barStyle="light-content" />
@@ -129,9 +173,18 @@ class Chat extends Component {
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>
+
                     <View style={{ flex: 5, justifyContent: 'center' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen')} >
+                        <View>
                             <Text style={{ color: 'white', fontSize: 15 }}>{this.state.name}</Text>
+                        </View>
+                        <View>
+                            <Text style={{ color: 'white', fontSize: 10 }}>{this.state.status}</Text>
+                        </View>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Biodata')}>
+                            <Icon name="dots-vertical" style={{ fontSize: 30, alignItems: 'center', justifyContent: 'center', paddingRight: 15, color: 'white' }} />
                         </TouchableOpacity>
                     </View>
 
@@ -140,9 +193,14 @@ class Chat extends Component {
                 {/* hello */}
                 {/* mapping disini */}
                 <FlatList
+                    ref={ref => (this.flatList = ref)}
+                    onContentSizeChange={() =>
+                        this.flatList.scrollToEnd({ animated: true })
+                    }
+                    onLayout={() => this.flatList.scrollToEnd({ animated: true })}
                     data={this.state.messageList}
                     renderItem={this.renderRow}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item) => { item.uid }}
                 />
                 {/* mapping disini */}
 
@@ -152,7 +210,7 @@ class Chat extends Component {
 
                 <View style={{ padding: 0, flexDirection: 'row', maxHeight: 42, backgroundColor: 'white' }}>
                     <View style={{ flex: 8, padding: 3 }}>
-                        <TextInput style={{ backgroundColor: 'white', fontSize: 12, paddingLeft: 15, paddingRight: 15 }} placeholder='Message' onChangeText={this.handleChange('textMessage')}>
+                        <TextInput style={{ backgroundColor: 'white', fontSize: 12, paddingLeft: 15, width: 300, maxWidth: 300, paddingRight: 15 }} placeholder='Message' onChangeText={this.handleChange('textMessage')}>
                         </TextInput>
                     </View>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>

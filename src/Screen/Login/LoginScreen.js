@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, StyleSheet } from 'react-native'
 import { Container, Header, Tab, Tabs, TabHeading, Item, Input, Button } from 'native-base';
-// import Ava from './img/matthew.png'
 import { auth, db } from '../../Config/Config'
 
 class Loginscreen extends Component {
@@ -38,6 +37,14 @@ class Loginscreen extends Component {
             visible: false,
         });
     };
+
+    onLogin = async () => {
+        const id = auth.currentUser.uid
+        await db.ref('/user/' + id).child("status").set('online')
+        this.props.navigation.navigate('Login')
+        auth.signIn().then(res => console.warn('oke'));
+    };
+
 
     handleLogin = () => {
         const { email, password } = this.state;
