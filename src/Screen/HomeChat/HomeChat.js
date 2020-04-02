@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-    View, Text, Image, TouchableOpacity, TextInput, StatusBar, FlatList
+    View, Text, Image, TouchableOpacity, TextInput, StatusBar, FlatList, ToastAndroid
 } from 'react-native'
 // import Ava from './img/matthew.png'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -44,6 +44,13 @@ class HomeChat extends Component {
 
     }
 
+    onDeleteUser = async () => {
+        const id = auth.currentUser.uid
+        await db.ref('/messages/' + id).remove();
+        // await db.ref('/messages/' + id).remove();
+
+    };
+
 
     getDataUser() {
         db.ref('/user').once('value', (snapshot) => {
@@ -67,7 +74,7 @@ class HomeChat extends Component {
     renderRow = ({ item }) => {
         // console.log(item)
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)} onLongPress={this.onDeleteUser}>
                 <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={

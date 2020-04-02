@@ -43,19 +43,14 @@ class Chat extends Component {
             })
     }
 
-    deleteDataUser = async () => {
-        db.ref('/message').once('value', (snapshot) => {
-            const current_user = auth.currentUser.uid
-            const data = snapshot.val()
-            const message = Object.values(data)
-            // const result = message.filter(user => user.uid !== current_user);
-            console.log(message)
-            this.setState({
-                messages: message
-            })
-            console.log(messages)
-        })
-    }
+
+    onDeleteUser = async () => {
+        const id = auth.currentUser.uid
+        await db.ref('/messages/' + id).remove();
+        // await db.ref('/messages/' + id).remove();
+
+    };
+
 
     getDataUser() {
         db.ref('/user').once('value', (snapshot) => {
