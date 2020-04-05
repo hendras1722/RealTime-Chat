@@ -22,9 +22,7 @@ class Logup extends Component {
             email: '',
             password: '',
             uid: '',
-            photo: '',
-            latitude: null,
-            longitude: null,
+            photo: 'https://firebasestorage.googleapis.com/v0/b/coba1-458da.appspot.com/o/user.png?alt=media&token=9b88787d-7677-4aff-ac68-e61bc7c166a8',
             errorMessage: null,
             loading: false,
             updatesEnabled: false,
@@ -89,8 +87,6 @@ class Logup extends Component {
                             name: this.state.name,
                             status: 'Online',
                             photo: this.state.photo,
-                            longitude: this.state.location.longitude,
-                            latitude: this.state.location.latitude,
                             email: this.state.email,
                         })
                         .catch(error => console.log(error.message))

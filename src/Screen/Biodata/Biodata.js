@@ -19,8 +19,12 @@ export default class SettingsScreen extends Component {
         upload: false,
         names: '',
         name: User.name,
-        photo: User.photo
+        photo: User.photo,
+        latitude: User.latitude,
+        longitude: User.longitude,
+        newUser: require('../../../img/user.png')
     };
+
 
     onLogout = async () => {
         const id = auth.currentUser.uid
@@ -63,6 +67,9 @@ export default class SettingsScreen extends Component {
             console.log('error')
         } else {
             User.name = name;
+            User.uid = auth.currentUser.uid
+            User.latitude = this.state.latitude
+            User.longitude = this.state.longitude
             await this.updateUser();
         }
     };
@@ -117,12 +124,11 @@ export default class SettingsScreen extends Component {
 
     render() {
         const id = this.props
-        console.log('wooweuow', id)
         return (
             <View>
                 <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home', User.photo)} >
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>
@@ -149,24 +155,36 @@ export default class SettingsScreen extends Component {
                             )}
                     </TouchableOpacity>
                 </View>
-                <View style={{ top: 5, justifyContent: 'center', alignItems: 'center' }}>
-                    <Item style={{ width: 200 }}>
-                        <Input value={this.state.name} onChangeText={(text) => this.setState({ name: text })} />
-                    </Item>
-                </View>
-                <View style={{ marginVertical: 2.5, top: 5 }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30 }}>
-                        <Button style={{ padding: 10, backgroundColor: '#0092CD', width: 70, justifyContent: 'center', alignItems: 'center' }} onPress={this.onSubmit}>
-                            <Text style={{ color: 'white' }}>Save</Text>
-                        </Button>
+                <Text style={{ marginHorizontal: 20 }}>Nama :</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Icon name="account-edit" style={{ fontSize: 30 }} />
+                    </View>
+                    <View style={{ flex: 5 }}>
+                        <Item style={{ width: 250 }}>
+                            <Input value={this.state.name} onChangeText={(text) => this.setState({ name: text })} multiline={false} onSubmitEditing={this.onSubmit} />
+                        </Item>
                     </View>
                 </View>
-                <View style={{ marginVertical: 2.5 }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30 }}>
-                        <Button onPress={this.onLogout} style={{ padding: 10, backgroundColor: '#c41414', width: 70, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ color: 'white' }}>Logout</Text>
-                        </Button>
+                <View style={{ marginHorizontal: 15, marginVertical: 10 }}>
+                    <Text style={{ textAlign: 'justify' }}>Setelah memasukkan nama, tekan enter untuk menyimpan. Tampilan ini untuk menampilkan nama asli.</Text>
+                </View>
+                <Text style={{ marginHorizontal: 20 }}>Info :</Text>
+                <View style={{ top: 5, flexDirection: 'row' }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Icon name="information-outline" style={{ fontSize: 30 }} />
                     </View>
+                    <View style={{ flex: 5 }}>
+                        <Item style={{ width: 250 }}>
+                            <Button value={this.state.name} onChangeText={(text) => this.setState({ name: text })} multiline={false} onSubmitEditing={this.onSubmit} />
+                            <Text>Coming Soon</Text>
+                        </Item>
+                    </View>
+                </View>
+                <View style={{ marginVertical: 30, justifyContent: 'center', alignItems: 'center' }}>
+                    <Button onPress={this.handleLogin} style={{ padding: 10, width: 300, justifyContent: 'center', alignItems: 'center', backgroundColor: '#b71020' }} onPress={this.onLogout}>
+                        <Text style={{ color: 'white' }}>Keluar</Text>
+                    </Button>
                 </View>
             </View >
         );

@@ -76,7 +76,7 @@ const AppNavigator = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
   }
 );
 

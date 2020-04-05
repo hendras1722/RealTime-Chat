@@ -9,14 +9,15 @@ import User from '../../../User'
 
 export default class AuthLoadingScreen extends React.Component {
     componentDidMount() {
-        this._bootstrapAsync();
+        this.checkAuth();
     }
 
     // Fetch the token from storage then navigate to our appropriate place
-    _bootstrapAsync = async () => {
-        User.phone = await AsyncStorage.getItem('userPhone');
-        this.props.navigation.navigate(User.phone ? 'App' : 'Auth');
-    };
+    async checkAuth() {
+        await auth.onAuthStateChanged(user => {
+            this.props.navigation.navigate(user ? 'App' : 'Auth');
+        });
+    }
 
     // Render any loading content that you like here
     render() {

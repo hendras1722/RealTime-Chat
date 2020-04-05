@@ -72,7 +72,7 @@ export default class signup extends Component {
             .catch(error => {
                 this.setState({
                     upload: false,
-                    imageSource: require('../../../img/handsapp.png'),
+                    imageSource: require('../../../img/user.png'),
                 });
                 Alert.alert('Error', 'Error on upload Image');
             });

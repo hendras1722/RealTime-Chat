@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, StyleSheet, AsyncStorage } from 'react-native'
 import { Container, Header, Tab, Tabs, TabHeading, Item, Input, Button } from 'native-base';
 import { auth, db } from '../../Config/Config'
+import User from '../../../User'
 
 class Loginscreen extends Component {
     static navigationOptions = {
@@ -22,9 +23,9 @@ class Loginscreen extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         this._isMounted = true;
-
+        await this.checkAuth();
     };
 
     componentWillUnmount() {
@@ -69,6 +70,12 @@ class Loginscreen extends Component {
         }
     };
 
+    async checkAuth() {
+        await auth.onAuthStateChanged(user => {
+            this.props.navigation.navigate(user ? 'Home' : 'Loginscreen');
+        });
+    }
+
     render() {
         console.disableYellowBox = true
         return (
@@ -101,6 +108,17 @@ class Loginscreen extends Component {
                             <Button onPress={this.handleLogin} style={{ padding: 10, width: 300, justifyContent: 'center', alignItems: 'center', backgroundColor: '#067bab' }}>
                                 <Text style={{ color: 'white' }}>Masuk</Text>
                             </Button>
+                        </View>
+                        <View style={{ top: 20, justifyContent: 'center', alignItems: 'center' }}>
+                            <View>
+                                <Text>Belum punya akun</Text>
+                            </View>
+                            <View>
+                                <Button onPress={this.handleLogin} style={{ padding: 10, width: 300, justifyContent: 'center', alignItems: 'center', backgroundColor: '#067bab' }} onPress={() => this.props.navigation.navigate('Logup')}>
+                                    <Text style={{ color: 'white' }}>Buat Akun</Text>
+                                </Button>
+                            </View>
+
                         </View>
                     </View>
                 </View>

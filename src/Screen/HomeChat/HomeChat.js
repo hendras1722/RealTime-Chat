@@ -51,6 +51,19 @@ class HomeChat extends Component {
 
     };
 
+    // getDataMessage() {
+    //     db.ref('/user').once('value', (snapshot) => {
+    //         const current_user = auth.currentUser.uid
+    //         const data = snapshot.val()
+    //         const user = Object.values(data)
+    //         const result = user.filter(user => user.uid !== current_user);
+    //         // console.log(result)
+    //         this.setState({
+    //             users: result
+    //         })
+    //         // console.log(user)
+    //     })
+    // }
 
     getDataUser() {
         db.ref('/user').once('value', (snapshot) => {
@@ -72,19 +85,19 @@ class HomeChat extends Component {
     }
 
     renderRow = ({ item }) => {
-        // console.log(item)
+        console.log(item)
         return (
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Chat', item)} onLongPress={this.onDeleteUser}>
                 <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={
-                            item.photo ? { uri: item.photo } : require('../../../img/user.png')
+                            item.photo ? { uri: `${item.photo}` } : require('../../../img/user.png')
                         }
                             style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
 
                     </View>
                     <View style={{ flex: 2, borderColor: '#b3b6b9', borderBottomWidth: 1 }}>
-                        <Text style={{ fontSize: 15 }}>{item.name}</Text>
+                        <Text style={{ fontSize: 15, maxWidth: 150 }} ellipsizeMode='tail' numberOfLines={1}>{item.name}</Text>
                         <Text style={{ top: 10 }}>{item.status}</Text>
                     </View>
                 </View>

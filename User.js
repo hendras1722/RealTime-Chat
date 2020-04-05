@@ -1,11 +1,13 @@
 const User = {
-    // uid: null,
+    uid: null,
     name: null,
     email: null,
     phone: null,
     status: null,
     photo: null,
-    Teman: []
+    Teman: [],
+    latitude: null,
+    longitude: null
 
 }
 

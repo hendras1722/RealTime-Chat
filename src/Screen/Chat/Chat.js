@@ -22,7 +22,8 @@ class Chat extends Component {
             messages: '',
             messageList: '',
             title: '',
-            test: []
+            test: [],
+            defaultPhoto: require('../../../img/user.png')
             // test: props.navigation.navigate
         }
 
@@ -85,9 +86,10 @@ class Chat extends Component {
     }
 
 
-    handleChange = key => val => {
-        this.setState({ [key]: val })
-    }
+    // handleChange = key => val => {
+    //     this.setState({ [key]: val })
+
+    // }
 
     renderRow = ({ item }) => {
         console.disableYellowBox = true;
@@ -96,10 +98,9 @@ class Chat extends Component {
         const Chat = () => {
             if (item.from == auth.currentUser.uid) {
                 return (
-                    <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 20, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-
+                    <View style={{ flexDirection: 'row', marginVertical: 20, marginRight: 10, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                         <View style={{ backgroundColor: '#1bb2ef', padding: 10, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderTopRightRadius: 5, borderBottomRightRadius: 1 }}>
-                            <View style={{ maxWidth: 180, minWidth: 50 }}>
+                            <View style={{ maxWidth: 160, minWidth: 50 }}>
                                 <Text>{item.message}</Text>
                             </View>
                             <View style={{ flexDirection: 'row' }}>
@@ -114,17 +115,17 @@ class Chat extends Component {
                         <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderRightColor: 'transparent', borderRightWidth: 20, borderLeftColor: '#1bb2ef', borderLeftWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
                         </View>
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Image source={{ uri: `${User.photo}` }} style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
+                            <Image source={{ uri: `${User.photo}` }} style={{ width: 40, height: 40, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
                         </View>
                     </View >
                 )
             } else {
                 return (
                     <TouchableOpacity >
-                        <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 35, alignItems: 'flex-end', justifyContent: 'flex-start' }} >
+                        <View style={{ flexDirection: 'row', marginVertical: 20, left: 10, alignItems: 'flex-end', justifyContent: 'flex-start' }} >
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Detailscreen', { itemid: item.from })}>
                                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image source={{ uri: `${this.state.photo}` }} style={{ width: 65, height: 65, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
+                                    <Image source={{ uri: `${this.state.photo}` }} style={{ width: 40, height: 40, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
                                 </View>
                             </TouchableOpacity >
                             <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderLeftColor: 'transparent', borderLeftWidth: 20, borderRightColor: '#1bb2ef', borderRightWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
@@ -171,7 +172,7 @@ class Chat extends Component {
 
                     <View style={{ flex: 5, justifyContent: 'center' }}>
                         <View>
-                            <Text style={{ color: 'white', fontSize: 15 }}>{this.state.name}</Text>
+                            <Text style={{ color: 'white', fontSize: 15 }} ellipsizeMode='tail' numberOfLines={1}>{this.state.name}</Text>
                         </View>
                         <View>
                             <Text style={{ color: 'white', fontSize: 10 }}>{this.state.status}</Text>
@@ -204,13 +205,12 @@ class Chat extends Component {
                 </View>
 
                 <View style={{ padding: 0, flexDirection: 'row', maxHeight: 42, backgroundColor: 'white' }}>
-                    <View style={{ flex: 8, padding: 3 }}>
-                        <TextInput style={{ backgroundColor: 'white', fontSize: 12, paddingLeft: 15, width: 300, maxWidth: 300, paddingRight: 15 }} placeholder='Message' onChangeText={this.handleChange('textMessage')}>
-                        </TextInput>
+                    <View style={{ flex: 8, padding: 3 }} >
+                        <TextInput style={{ backgroundColor: 'white', fontSize: 12, paddingLeft: 15, width: 300, maxWidth: 300, paddingRight: 15, minHeight: 50 }} placeholder='Message' onChangeText={(text) => this.setState({ textMessage: text })} value={this.state.textMessage} multiline={true} onSubmitEditing={this.sendMessage} />
                     </View>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
                         {/* <Text>hello</Text> */}
-                        <TouchableOpacity onPress={this.sendMessage} >
+                        <TouchableOpacity onPress={this.sendMessage}  >
                             <Icon name="send" style={{ fontSize: 25, color: '#0092CD' }}></Icon>
                         </TouchableOpacity>
                     </View>

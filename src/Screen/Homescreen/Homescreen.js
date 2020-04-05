@@ -38,6 +38,8 @@ class Homescreen extends Component {
                 User.email = person.email;
                 User.status = person.status;
                 User.photo = person.photo ? person.photo : null;
+                User.latitude = person.latitude;
+                User.longitude = person.longitude;
 
             } else {
                 this.setState(prevState => {
@@ -88,7 +90,7 @@ class Homescreen extends Component {
                         <Text style={{ color: 'white', fontSize: 18 }}>HandsApp</Text>
                     </View>
                     <View>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Biodata')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Biodata', User.photo)}>
                             <Icon name="dots-vertical" style={{ fontSize: 30, alignItems: 'center', justifyContent: 'center', paddingRight: 15, color: 'white' }} />
 
                         </TouchableOpacity>
