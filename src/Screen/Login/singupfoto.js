@@ -100,7 +100,7 @@ export default class signup extends Component {
             <View>
                 <View style={{ backgroundColor: '#0092CD', flexDirection: 'row', paddingTop: 10, paddingBottom: 10 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+                        <TouchableOpacity onPress={this.onLogout} >
                             <Icon name="arrow-left" style={{ fontSize: 25, color: 'white' }}></Icon>
                         </TouchableOpacity>
                     </View>

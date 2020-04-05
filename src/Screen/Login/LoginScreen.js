@@ -111,9 +111,9 @@ class Loginscreen extends Component {
                         </View>
                         <View style={{ top: 20, justifyContent: 'center', alignItems: 'center' }}>
                             <View>
-                                <Text>Belum punya akun</Text>
+                                <Text style={{ color: '#aeb3b9' }}> ──────  <Text style={{ color: 'black' }}>Belum punya akun</Text>  ────── </Text>
                             </View>
-                            <View>
+                            <View style={{ top: 20 }}>
                                 <Button onPress={this.handleLogin} style={{ padding: 10, width: 300, justifyContent: 'center', alignItems: 'center', backgroundColor: '#067bab' }} onPress={() => this.props.navigation.navigate('Logup')}>
                                     <Text style={{ color: 'white' }}>Buat Akun</Text>
                                 </Button>

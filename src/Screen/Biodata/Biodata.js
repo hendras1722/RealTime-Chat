@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity, Image, Alert, } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity, Image, Alert, ToastAndroid } from 'react-native';
 // import styles from '../constants/styles';
 import { auth, db } from '../../Config/Config';
 import ImagePicker from 'react-native-image-picker';
@@ -77,14 +77,15 @@ export default class SettingsScreen extends Component {
 
     updateUser = () => {
         db.ref('/user').child(auth.currentUser.uid).set(User);
-        Alert.alert('Success', 'succesfull.');
+        ToastAndroid.show("Success has been change", ToastAndroid.LONG)
     };
 
     updateUserImage = async (imageUrl) => {
         const id = auth.currentUser.uid
         auth.currentUser.photo = imageUrl
         await db.ref('/user/' + id).child('photo').set(imageUrl)
-        Alert.alert('Succes', 'image changed successfull')
+
+        ToastAndroid.show("Success", ToastAndroid.LONG)
         this.setState({ upload: false, imageSource: { uri: imageUrl } })
     }
 
@@ -101,7 +102,8 @@ export default class SettingsScreen extends Component {
                     upload: false,
                     imageSource: require('../../../img/handsapp.png'),
                 });
-                Alert.alert('Error', 'Error on upload Image');
+
+                ToastAndroid.show("Failed upload photo, please try again", ToastAndroid.LONG)
             });
     };
 
@@ -190,3 +192,17 @@ export default class SettingsScreen extends Component {
         );
     }
 }
+
+const Toast = props => {
+    if (props.visible) {
+        ToastAndroid.showWithGravityAndOffset(
+            props.message,
+            ToastAndroid.LONG,
+            ToastAndroid.TOP,
+            1,
+            800,
+        );
+        return null;
+    }
+    return null;
+};

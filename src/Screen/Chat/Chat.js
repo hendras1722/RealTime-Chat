@@ -99,20 +99,16 @@ class Chat extends Component {
             if (item.from == auth.currentUser.uid) {
                 return (
                     <View style={{ flexDirection: 'row', marginVertical: 20, marginRight: 10, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                        <View style={{ backgroundColor: '#1bb2ef', padding: 10, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderTopRightRadius: 5, borderBottomRightRadius: 1 }}>
+                        <View style={{ backgroundColor: '#1bb2ef8a', padding: 10, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderTopRightRadius: 5, borderBottomRightRadius: 1 }}>
                             <View style={{ maxWidth: 160, minWidth: 50 }}>
-                                <Text>{item.message}</Text>
+                                <Text style={{ fontSize: 12 }}>{item.message}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ flex: 5 }}>
-                                    <Text style={{ top: 5, fontSize: 10 }}>
-                                        {moment(item.time).format('LT')}
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1 }}></View>
+                            <View style={{ alignItems: 'flex-start' }}>
+                                <Text style={{ top: 5, fontSize: 10 }} ellipsizeMode='tail' numberOfLines={1}> {moment(item.time).format('LT')}
+                                </Text>
                             </View>
                         </View>
-                        <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderRightColor: 'transparent', borderRightWidth: 20, borderLeftColor: '#1bb2ef', borderLeftWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
+                        <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderRightColor: 'transparent', borderRightWidth: 20, borderLeftColor: '#1bb2ef8a', borderLeftWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
                         </View>
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={{ uri: `${User.photo}` }} style={{ width: 40, height: 40, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
@@ -128,18 +124,15 @@ class Chat extends Component {
                                     <Image source={{ uri: `${this.state.photo}` }} style={{ width: 40, height: 40, borderRadius: 50, position: 'relative', paddingBottom: 10 }} />
                                 </View>
                             </TouchableOpacity >
-                            <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderLeftColor: 'transparent', borderLeftWidth: 20, borderRightColor: '#1bb2ef', borderRightWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
+                            <View style={{ borderTopColor: "transparent", borderTopWidth: 20, borderLeftColor: 'transparent', borderLeftWidth: 20, borderRightColor: '#838b9aad', borderRightWidth: 20, borderBottomColor: 'transparent', borderBottomWidth: 20 }}>
                             </View>
-                            <View style={{ backgroundColor: '#1bb2ef', padding: 10, borderTopRightRadius: 5, borderBottomRightRadius: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 1 }}>
+                            <View style={{ backgroundColor: '#838b9aad', padding: 10, borderTopRightRadius: 5, borderBottomRightRadius: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 1 }}>
                                 <View style={{ maxWidth: 180, minWidth: 50 }}>
-                                    <Text>{item.message}</Text>
+                                    <Text style={{ fontSize: 12 }}>{item.message}</Text>
                                 </View>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}></View>
-                                    <View style={{ flex: 5 }}>
-                                        <Text style={{ top: 5, fontSize: 10 }}>{moment(item.time).format('LT')}
-                                        </Text>
-                                    </View>
+                                <View style={{ alignItems: 'flex-end' }}>
+                                    <Text style={{ top: 5, fontSize: 10 }} ellipsizeMode='tail' numberOfLines={1}> {moment(item.time).format('LT')}
+                                    </Text>
                                 </View>
                             </View>
                         </View >
