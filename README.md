@@ -30,6 +30,10 @@ set path
 Java
 Android_home
 ```
+## Contributing
+ <img width="250" src="https://avatars1.githubusercontent.com/u/57746184?s=460&u=bfc9704fd2e0f0bdcc060e68bab55191658613c3&v=4"> 
+Muhammad Syahendra Anindyantoro
+
 
 ## License
 MSA Official
