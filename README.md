@@ -5,8 +5,9 @@ Create a realtime chat application using Firebase
 ## Installation
 
 ``` 
-git clone (https://github.com/hendras1722/RealTime-Chat.git)
+git clone https://github.com/hendras1722/RealTime-Chat.git
 ```
+
 Open folder RealTime-Chat
 Open CMD. navigate to folder RealTime-Chat
 
