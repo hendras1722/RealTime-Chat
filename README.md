@@ -22,10 +22,9 @@ npx react-native run-android
 ```
 
 before you run react native. 
-```
 Install [Android SDK](https://developer.android.com/studio)
 Instal Java [Java](https://www.java.com/en/download/)
-```
+
 set path 
 ```
 Java
